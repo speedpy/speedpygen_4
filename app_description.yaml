@@ -1,0 +1,84 @@
+models:
+  - name: User
+    fields:
+      - name: username
+        type: CharField
+        required: true
+        is_unique: true
+      - name: email
+        type: CharField
+        required: true
+        is_unique: true
+      - name: password
+        type: CharField
+        required: true
+  - name: Image
+    fields:
+      - name: user
+        type: ForeignKey
+        required: true
+        to: User
+      - name: original_image
+        type: ImageField
+        required: true
+      - name: ghibli_styled_image
+        type: ImageField
+        required: false
+      - name: upload_date
+        type: DateTimeField
+        required: true
+        default: django.utils.timezone.now
+  - name: ImageCollection
+    fields:
+      - name: user
+        type: ForeignKey
+        required: true
+        to: User
+      - name: name
+        type: CharField
+        required: true
+      - name: description
+        type: TextField
+        required: false
+      - name: images
+        type: ManyToManyField
+        required: false
+        to: Image
+      - name: created_at
+        type: DateTimeField
+        required: true
+        default: django.utils.timezone.now
+  - name: GhibliStyle
+    fields:
+      - name: name
+        type: CharField
+        required: true
+        is_unique: true
+      - name: description
+        type: TextField
+        required: false
+  - name: StyledImageJob
+    fields:
+      - name: user
+        type: ForeignKey
+        required: true
+        to: User
+      - name: image
+        type: ForeignKey
+        required: true
+        to: Image
+      - name: style
+        type: ForeignKey
+        required: true
+        to: GhibliStyle
+      - name: status
+        type: CharField
+        required: true
+        default: 'pending'
+      - name: created_at
+        type: DateTimeField
+        required: true
+        default: django.utils.timezone.now
+      - name: completed_at
+        type: DateTimeField
+        required: false

@@ -1,0 +1,29 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}GhibliStyle Details{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">GhibliStyle Details</h2>
+
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="row mb-2">
+                    <div class="col-4"><strong>Name:</strong></div>
+                    <div class="col-8">{{ ghiblistyle.name }}</div>
+                </div> 
+                <div class="row mb-2">
+                    <div class="col-4"><strong>Description:</strong></div>
+                    <div class="col-8">{{ ghiblistyle.description }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a href="{% url 'ghiblistyle_update' ghiblistyle.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'ghiblistyle_delete' ghiblistyle.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'ghiblistyle_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+    {% endblock %}

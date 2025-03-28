@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}StyledImageJob List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">StyledImageJob List</h2>
+
+        <a href="{% url 'styledimagejob_create' %}" class="btn btn-primary mb-3">Create New StyledImageJob</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User</th> <th>Image</th> <th>Style</th> <th>Status</th> <th>Created At</th> <th>Completed At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for styledimagejob in styledimagejob_list %}
+                <tr>
+                    <td>{{ styledimagejob.user }}</td> <td>{{ styledimagejob.image }}</td> <td>{{ styledimagejob.style }}</td> <td>{{ styledimagejob.status }}</td> <td>{{ styledimagejob.created_at }}</td> <td>{{ styledimagejob.completed_at }}</td>
+                    <td>
+                        <a href="{% url 'styledimagejob_detail' styledimagejob.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'styledimagejob_update' styledimagejob.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'styledimagejob_delete' styledimagejob.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No styledimagejobs found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}GhibliStyle List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">GhibliStyle List</h2>
+
+        <a href="{% url 'ghiblistyle_create' %}" class="btn btn-primary mb-3">Create New GhibliStyle</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th> <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ghiblistyle in ghiblistyle_list %}
+                <tr>
+                    <td>{{ ghiblistyle.name }}</td> <td>{{ ghiblistyle.description }}</td>
+                    <td>
+                        <a href="{% url 'ghiblistyle_detail' ghiblistyle.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'ghiblistyle_update' ghiblistyle.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'ghiblistyle_delete' ghiblistyle.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="1">No ghiblistyles found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

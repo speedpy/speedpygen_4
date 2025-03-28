@@ -1,0 +1,41 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}Delete Image{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">Delete Image</h2>
+
+        <div class="alert alert-danger">
+            <p>Are you sure you want to delete this image?</p>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    
+                    <div class="row mb-2">
+                        <div class="col-4"><strong>User:</strong></div>
+                        <div class="col-8">{{ object.user }}</div>
+                    </div> 
+                    <div class="row mb-2">
+                        <div class="col-4"><strong>Original Image:</strong></div>
+                        <div class="col-8">{{ object.original_image }}</div>
+                    </div> 
+                    <div class="row mb-2">
+                        <div class="col-4"><strong>Ghibli Styled Image:</strong></div>
+                        <div class="col-8">{{ object.ghibli_styled_image }}</div>
+                    </div> 
+                    <div class="row mb-2">
+                        <div class="col-4"><strong>Upload Date:</strong></div>
+                        <div class="col-8">{{ object.upload_date }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'image_detail' object.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+    {% endblock %}

@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}ImageCollection List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">ImageCollection List</h2>
+
+        <a href="{% url 'imagecollection_create' %}" class="btn btn-primary mb-3">Create New ImageCollection</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User</th> <th>Name</th> <th>Description</th> <th>Images</th> <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for imagecollection in imagecollection_list %}
+                <tr>
+                    <td>{{ imagecollection.user }}</td> <td>{{ imagecollection.name }}</td> <td>{{ imagecollection.description }}</td> <td>{{ imagecollection.images }}</td> <td>{{ imagecollection.created_at }}</td>
+                    <td>
+                        <a href="{% url 'imagecollection_detail' imagecollection.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'imagecollection_update' imagecollection.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'imagecollection_delete' imagecollection.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No imagecollections found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

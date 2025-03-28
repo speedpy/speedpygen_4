@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}Image List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">Image List</h2>
+
+        <a href="{% url 'image_create' %}" class="btn btn-primary mb-3">Create New Image</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User</th> <th>Original Image</th> <th>Ghibli Styled Image</th> <th>Upload Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for image in image_list %}
+                <tr>
+                    <td>{{ image.user }}</td> <td>{{ image.original_image }}</td> <td>{{ image.ghibli_styled_image }}</td> <td>{{ image.upload_date }}</td>
+                    <td>
+                        <a href="{% url 'image_detail' image.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'image_update' image.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'image_delete' image.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No images found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
